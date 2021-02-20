@@ -1,13 +1,13 @@
 # users
-| Column          | Type   | Options     |
-| --------------- | ------ | ----------- |
-| nick_name       | string | null :false |
-| mail            | string | null :false |
-| password        | string | null :false |
-| last_name       | string | null :false |
-| first_name      | string | nill :false |
-| last_name_kana  | string | null :false |
-| first_name_kana | string | null :false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nick_name          | string | null :false |
+| mail               | string | null :false |
+| encrypted_password | string | null :false |
+| last_name          | string | null :false |
+| first_name         | string | nill :false |
+| last_name_kana     | string | null :false |
+| first_name_kana    | string | null :false |
 
 ## Association
 has_many :items

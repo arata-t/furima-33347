@@ -51,7 +51,6 @@ has_one    :purchase
 |               |            |                                |
 
 ### Association
-belongs_to :user
 belongs_to :purchase
 
 

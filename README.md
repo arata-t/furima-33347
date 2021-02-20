@@ -14,8 +14,7 @@
 
 ## Association
 has_many :items
-has_one  :deliveries
-has_one  :purchases
+has_many :purchases
 has_many :comments
 
 
@@ -36,6 +35,7 @@ has_many :comments
 ### Associations
 belongs_to :user
 has_many   :comments
+has_one    :purchase
 
 
 # deliveries
@@ -45,13 +45,14 @@ has_many   :comments
 | area_id       | integer    | null :false                    |
 | city          | string     | null :false                    |
 | house_num     | string     | null :false                    |
-| building_name | string     | null :false                    |
+| building_name | string     |                                |
 | phone         | string     | null :false                    |
-| user          | references | null :false, foreign_key: true |
+| purchase      | references | null :false, foreign_key: true |
 |               |            |                                |
 
 ### Association
 belongs_to :user
+belongs_to :purchase
 
 
 # Purchases
@@ -63,6 +64,8 @@ belongs_to :user
 
 ### Association
 belongs_to :user
+belongs_to :item
+has_one    :delivery
 
 
 # Comment

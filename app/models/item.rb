@@ -5,6 +5,9 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :product_status
+  belongs_to :burden
+  belongs_to :area
+  belongs_to :days
 
   validates :product_name, presence: true
   validates :price,        presence: true

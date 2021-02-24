@@ -4,10 +4,15 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+  belongs_to :product_status
 
   validates :product_name, presence: true
   validates :price,        presence: true
   validates :description,  presence: true
 
-  validates :category_id,  numericality: {other_than: 1 }
+  validates :category_id,       numericality: {other_than: 1 }
+  validates :product_status_id, numericality: {other_than: 1 }
+  validates :burden_id,         numericality: {other_than: 1 }
+  validates :area_id,           numericality: {other_than: 1 }
+  validates :days_id,           numericality: {other_than: 1 }
 end

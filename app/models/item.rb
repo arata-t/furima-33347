@@ -21,6 +21,6 @@ class Item < ApplicationRecord
   validates :price,             numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "販売価格は¥300~¥9,999,999としてください" }
 
   with_options presence: true do
-    validates :price, numericality: { only_integer: true, message: "is invalid. 販売価格は半角数字としてください" }
+    validates :price,           numericality: { only_integer: true, message: "is invalid. 販売価格は半角数字としてください" }
   end
 end

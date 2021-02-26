@@ -54,7 +54,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include 'Product status 商品の状態を選択してください'
       end
 
-      it '配送料の負担を選択しないと出品できない' do 
+      it '配送料の負担を選択しないと出品できない' do
         @item.burden_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include 'Burden 配送料の負担を選択してください'
@@ -75,7 +75,7 @@ RSpec.describe Item, type: :model do
       it '配送元の地域は１を選択すると出品できない' do
         @item.area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include "Area 配送元の地域を選択してください"
+        expect(@item.errors.full_messages).to include 'Area 配送元の地域を選択してください'
       end
 
       it '配送までの日数を選択しないと出品できない' do
@@ -87,7 +87,7 @@ RSpec.describe Item, type: :model do
       it '配送までの日数は１を選択すると出品できない' do
         @item.days_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include "Days 配送までの日数を選択してください"
+        expect(@item.errors.full_messages).to include 'Days 配送までの日数を選択してください'
       end
 
       it '販売価格が空だと出品できない' do
@@ -103,7 +103,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '販売価格が10,000,000円以上だと出品できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price 販売価格は¥300~¥9,999,999としてください'
       end
@@ -115,7 +115,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '販売価格は英数混合では出品できない' do
-        @item.price = "test01"
+        @item.price = 'test01'
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price is invalid. 販売価格は半角数字としてください'
       end

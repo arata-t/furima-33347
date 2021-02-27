@@ -1,6 +1,6 @@
 <%= render "shared/header" %>
 
-<%# 商品の概要 %>
+<%# 商品の概要 ※デプロイ後削除 %>
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
@@ -12,11 +12,11 @@
 <%
 =begin
 %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+      <%# 商品が売れている場合は、sold outを表示しましょう ※デプロイ後削除 %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <%# //商品が売れている場合は、sold outを表示しましょう ※デプロイ後削除 %>
 <%
 =end
 %>
@@ -32,13 +32,13 @@
     </div>
 
     <% if user_signed_in? && current_user.id == @item.user.id %>
-      <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+      <%= link_to "商品の編集", "/items/#{@item.id}/edit", method: :get, class: "item-red-btn" %>
       <p class="or-text">or</p>
       <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
     <% elsif user_signed_in? && current_user.id != @item.user.id %>
-      <%# 商品が売れていない場合はこちらを表示しましょう %>
+      <%# 商品が売れていない場合はこちらを表示しましょう ※デプロイ後削除 %>
       <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-      <%# //商品が売れていない場合はこちらを表示しましょう %>
+      <%# //商品が売れていない場合はこちらを表示しましょう ※デプロイ後削除 %>
     <% end %>
 
     <div class="item-explain-box">
@@ -83,7 +83,7 @@
       </div>
     </div>
   </div>
-  <%# /商品の概要 %>
+  <%# /商品の概要 ※デプロイ後削除 %>
 
   <div class="comment-box">
     <form>

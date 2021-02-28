@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
     if @item.destroy
       redirect_to root_path
     else
-      render :edit
+      render :show
     end
   end
 
@@ -54,8 +54,6 @@ class ItemsController < ApplicationController
   end
 
   def redirect
-    unless current_user.id == @item.user.id
-      redirect_to action: :index 
-    end
+    redirect_to action: :index unless current_user.id == @item.user.id
   end
 end

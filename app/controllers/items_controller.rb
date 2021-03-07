@@ -58,8 +58,6 @@ class ItemsController < ApplicationController
   end
 
   def sold_out
-    if @item.order.present? 
-      redirect_to action: :index
-    end
+    redirect_to action: :index if @item.order.present?
   end
 end

@@ -1,14 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, :sold_out
+
   def index
     @item_order = ItemOrder.new
-    @item = Item.find(params[:item_id])
     redirect_to root_path if current_user.id == @item.user.id
   end
 
   def create
     @item_order = ItemOrder.new(order_params)
-    @item = Item.find(params[:item_id])
     if @item_order.valid?
       pay_item
       @item_order.save
@@ -19,6 +19,14 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def sold_out
+    redirect_to root_path if @item.order.present?
+  end
 
   def order_params
     params.require(:item_order)

@@ -17,7 +17,7 @@ RSpec.describe ItemOrder, type: :model do
       end
     end
 
-    context '商品が購入できる場合' do
+    context '商品が購入できない場合' do
       it 'カード情報、有効期限、セキュリティーコードが空だと購入出来ない' do
         @item_order.token = ''
         @item_order.valid?
@@ -81,7 +81,31 @@ RSpec.describe ItemOrder, type: :model do
       it '電話番号は半角数字でなければ購入できない' do
         @item_order.phone = '１２３４５６７８９０９'
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include 'Phone には半角数字のみで入力してください'
+        expect(@item_order.errors.full_messages).to include 'Phone には半角数字のみで12文字以下としてください'
+      end
+
+      it '電話番号は半角数字のみでないと登録できない' do
+        @item_order.phone = 'abcdefghij'
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include 'Phone には半角数字のみで12文字以下としてください'
+      end
+
+      it '電話番号は12桁以上だと登録できない' do
+        @item_order.phone = 123456789098765
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include 'Phone には半角数字のみで12文字以下としてください'
+      end
+
+      it 'user_idが空では購入できない' do
+        @item_order.user_id = ''
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include "User can't be blank"
+      end
+
+      it 'item_idが空では購入できない' do
+        @item_order.item_id = ''
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include "Item can't be blank"
       end
     end
   end

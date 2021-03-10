@@ -63,18 +63,6 @@ RSpec.describe ItemOrder, type: :model do
         expect(@item_order.errors.full_messages).to include "House num can't be blank"
       end
 
-      it '地番は半角英数文字では購入できない' do
-        @item_order.house_num = '123abcd'
-        @item_order.valid?
-        expect(@item_order.errors.full_messages).to include 'House num には全角文字を使用してください'
-      end
-
-      it '建物名は半角英数文字では購入できない' do
-        @item_order.building_name = 'aaa'
-        @item_order.valid?
-        expect(@item_order.errors.full_messages).to include 'Building name には全角文字を使用してください'
-      end
-
       it '電話番号は入力しなければ購入できない' do
         @item_order.phone = ''
         @item_order.valid?
@@ -94,7 +82,7 @@ RSpec.describe ItemOrder, type: :model do
       end
 
       it '電話番号は12桁以上だと登録できない' do
-        @item_order.phone = 123456789098765
+        @item_order.phone = '123456789098765'
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include 'Phone には半角数字のみで12文字以下としてください'
       end

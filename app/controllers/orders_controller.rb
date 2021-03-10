@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, :sold_out, :user_id
-  
 
   def index
     @item_order = ItemOrder.new

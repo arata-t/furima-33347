@@ -63,8 +63,8 @@ RSpec.describe ItemOrder, type: :model do
         expect(@item_order.errors.full_messages).to include "House num can't be blank"
       end
 
-      it '地番は半角英数文字は購入できない' do
-        @item_order.house_num = ''
+      it '地番は半角英数文字では購入できない' do
+        @item_order.house_num = '123abcd'
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include 'House num には全角文字を使用してください'
       end

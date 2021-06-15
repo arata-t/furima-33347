@@ -1,80 +1,70 @@
-# users
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| nickname           | string | null :false               |
-| email              | string | null :false, unique :true |
-| encrypted_password | string | null :false               |
-| last_name          | string | null :false               |
-| first_name         | string | nill :false               |
-| last_name_kana     | string | null :false               |
-| first_name_kana    | string | null :false               |
-| birth_day          | date   | null :false               |
-|                    |        |                           |
+# 😄 furima
+READMEをみていただきありがとうございます。
+
+このアプリはプログラミングスクールの課題により作成したアプリケーションです。
+# 🌐 URL
+https://furima-33347.herokuapp.com/
 
 
-## Association
-has_many :items
-has_many :orders
-has_many :comments
+### ID/Pass
+- ID: admin
+- Pass: 2222
 
 
-# items
-| Column            | Type           | Options                        |
-| ----------------- | -------------- | ------------------------------ |
-| product_name      | string         | null :false                    |
-| category_id       | integer        | null :false                    |
-| price             | integer        | null :false                    |
-| product_status_id | integer        | null :false                    |
-| burden_id         | integer        | null :false                    |
-| area_id           | integer        | null :false                    |
-| days_id           | integer        | null :false                    |
-| description       | text           | null :false                    |
-| user              | references     | null :false, foreign_key: true |
-|                   |                |                                |
+### テスト用アカウント等
 
-### Associations
-belongs_to :user
-has_many   :comments
-has_one    :order
+ 購入者用
+- メールアドレス: test@test
+- パスワード: test1234
+- 購入用カード情報
+- 番号：4242424242424242
+- 期限：Tue Mar 23 2021 00:00:00 GMT+0900 (JST)
+- セキュリティコード：123
+出品者用
+- メールアドレス名: admin@admin
+- パスワード: admin1234
+
+# 💡工夫した点
+マイルストーンを定め開発を行なったことです。
+アプリの実装は仕事前、仕事後に行い、限られた時間を有効活用して進めていく必要がありました。一方で、どの程度時間をさけばいいのか明確でないということが課題でした。
+そこで、実装する機能毎にあらかじめtrelloで納期（マイルストーン）を定め、マイルストーンに対してどの程度進んでいるのかがわかるようにしました。その結果、適切な時間配分を行えるようになり、仕事と学習時間の配分のバランスが取りやすくなりました。アプリの完成は当初の予定より早く完成位させることができました。
+
+# 💦苦労した点
+エラーの解決方法です。
+当初、私はエラーが発生したらエラー本文をGoogle検索にコピーアンドペーストしておりました。しかし、エラーがなぜ発生しているかを理解せず検索していたため、検索結果の取捨選択がでず、エラーをいつまでも解決できないでいました。
+そこで、手順をエラーが発生→エラー本文を翻訳→エラーの原因を考察→google検索という流れに変更しました。その結果、エラーの内容を考える癖がつき、検索結果の取捨選択ができるようになりました。また、原因と結果が結びつくことで理解力の向上にもつながりました。
+この経験から、どんなエラーだとしても同様の手順で対処できるという自信が得られました。また、エラーのたびに成長を実感できるようになり、今後の学習の向き合い方もポシティブになりました。
+
+# 💽使用技術
+
+## フロントエンド
+
+- HTML
+- CSS
+- JavaScript
+
+## バックエンド
+
+- Ruby 2.6.5
+- Rails 6.0.3.7
+
+## データベース
+
+- MySQL2
+
+## 開発環境
+
+- Rubocop (Rinter)
+
+## 本番環境
+
+- heroku
+
+## テスト
+
+- Rspec
+    - 単体テスト（model)
+    - 機能テスト（request)
+    - 結合テスト（system)
 
 
-# deliveries
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| postal_code   | string     | null :false                    |
-| area_id       | integer    | null :false                    |
-| city          | string     | null :false                    |
-| house_num     | string     | null :false                    |
-| building_name | string     |                                |
-| phone         | string     | null :false                    |
-| order         | references | null :false, foreign_key: true |
-|               |            |                                |
-
-### Association
-belongs_to :order
-
-
-# Orders
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null :false, foreign_key: true |
-| item   | references | null :false, foreign_key: true |
-|        |            |                                |
-
-### Association
-belongs_to :user
-belongs_to :item
-has_one    :delivery
-
-
-# Comment
-| Columns | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| comment | text       | null :false                    |
-| user    | references | null :false, foreign_key: true |
-| item    | references | null :false, foreign_key: true |
-|         |            |                                |
-
-### Association
-belongs_to :user
-belongs_to :item

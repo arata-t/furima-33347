@@ -1,3 +1,10 @@
+name: Ruby
+
+on:
+  push:
+  pull_request:
+    branches: [ master ]
+
 jobs:
   build:
 
@@ -5,10 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 2.5
+    - name: Set up Ruby 2.6.5
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.5.x
+        ruby-version: 2.6.5
     - name: Budle install
       run: |
         gem install bundler
@@ -16,7 +23,7 @@ jobs:
     - name: Setup Database
       run: |
         cp config/database.yml.ci config/database.yml
-        sudo /etc/init.d/mysql start
+        sudo /etc/init.d/mysql start 
         bundle exec rake db:create
         bundle exec rake db:schema:load
       env:

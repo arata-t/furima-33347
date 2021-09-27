@@ -1,32 +1,28 @@
-name: Ruby
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
 jobs:
-  test:
+  build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['2.6.5']
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+    - name: Set up Ruby 2.5
+      uses: actions/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name:  SetupDB
+        ruby-version: 2.5.x
+    - name: Budle install
       run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+    - name: Setup Database
+      run: |
+        cp config/database.yml.ci config/database.yml
         sudo /etc/init.d/mysql start
-        bin/yarn install
-        bin/rails db:create
-        bin/rails db:schema:load
-        
-    - name: Run tests
-      run: bundle exec rspec spec/models/user_spec.rb
+        bundle exec rake db:create
+        bundle exec rake db:schema:load
+      env:
+        RAILS_ENV: test
+    - name: test with Rake
+      run: |
+        bundle exec rake
+      env:
+        RAILS_ENV: test

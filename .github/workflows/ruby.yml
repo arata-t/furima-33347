@@ -26,5 +26,6 @@ jobs:
         sudo /etc/init.d/mysql start
         bin/rails db:create
         bin/rails db:schema:load
+        bin/yarn install
     - name: Run tests
       run: bundle exec rspec spec/models/user_spec.rb
